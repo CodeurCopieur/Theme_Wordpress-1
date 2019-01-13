@@ -11,7 +11,8 @@
 </head>
 <body>
 <header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- NAV -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light"><!-- NAV -->
     <div class="container">
       <a class="navbar-brand" href="#">Navbar</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,6 +43,7 @@
       </div>
     </div>
   </nav>
+  <!-- NAV -->
 </header>
 
   <div class="container">
@@ -50,55 +52,37 @@
     </div>
   </div>
 
-  <section>
-    <div class="container">
-      <div class="row  m-dw-30">
-        <div class="col-sm-4">
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/ms-icon.png" alt="" class="img-responsive">
-        </div>
-        <div class="col-sm-8">
-            <h1>Titre de l'article</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        </div>
-      </div>
-
-      <div class="row m-dw-30">
-        <div class="col-sm-4">
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/ms-icon.png" alt="" class="img-responsive">
-        </div>
-        <div class="col-sm-8">
-            <h1>Titre de l'article</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        </div>
-      </div>
-
-      <div class="row m-dw-30">
-        <div class="col-sm-4">
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/ms-icon.png" alt="" class="img-responsive">
-        </div>
-        <div class="col-sm-8">
-            <h1>Titre de l'article</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        </div>
-      </div>
-
-      <div class="row m-dw-30">
-        <div class="col-sm-4">
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/ms-icon.png" alt="" class="img-responsive">
-        </div>
-        <div class="col-sm-8">
-            <h1>Titre de l'article</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        </div>
-      </div>
 
 
+<section>
+  <div class="container">
+    <?php if (have_posts()): ?>
+      <?php     while (have_posts()): the_post(); ?>  <!-- invoque l'itération de l'article en cours -->
+            <div class="card col-md-12 p-3">
+              <div class="row ">
+              <div class="col-md-4">
+              <!--  <img src="<?php echo get_template_directory_uri(); ?>/assets/ms-icon.png" alt="" class="img-responsive"> -->
+              <?php the_post_thumbnail('thumbnail'); ?>
+              </div>
+              <div class="col-md-8">
+                <div class="card-block">
+                  <h1 class="card-title"><?php the_title(); ?></h1>
+                  <p><?php the_excerpt(); ?></p>
+                </div>
+              </div>
+            </div>
+            </div>
+            <?php endwhile; ?>
     </div>
-  </section>
+  <?php else: ?>
+      <div class="row">
+         <div class="col-xs-12">
+            <p>y a pas de résultats</p>
+         </div>
+      </div>
+  <?php  endif; ?>
+
+</section>
 
     <?php wp_footer(); ?>
 </body>
